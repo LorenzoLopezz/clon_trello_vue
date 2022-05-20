@@ -7,7 +7,9 @@ export default {
     commit(types.FETCH_BOARDS_REQUEST)
 
     API.getBoardsByUser(user)
-      .then(snap => commit(types.FETCH_BOARDS_SUCCESS, { boards: snap.val }))
+      .then(snap => {
+        commit(types.FETCH_BOARDS_SUCCESS, { boards: snap })
+      })
       .catch(error => commit(types.FETCH_BOARDS_FAILURE, { error }))
   },
 

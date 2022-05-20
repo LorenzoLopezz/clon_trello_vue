@@ -8,7 +8,7 @@ export default {
     state.error = null
   },
   [types.FETCH_BOARDS_SUCCESS] (state, { boards }) {
-    state.fetchingData = true
+    state.fetchingData = false
     state.error = null
     state.boards = { ...boards }
   },

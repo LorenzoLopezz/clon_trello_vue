@@ -1,21 +1,33 @@
 import { db } from './firebase'
-import { collection } from 'firebase/firestore'
+import { collection, query, where, getDocs, addDoc } from 'firebase/firestore'
 
 const boardsRef = collection(db, 'boards')
 const listsRef = collection(db, 'lists')
 const tasksRef = collection(db, 'tasks')
 
 export default {
-  getBoardsByUser (userId) {
-    const query = boardsRef.orderByChild('owner').equalTo(userId)
-    return query.once('value')
-  },
-  postBoard (name, owner = 1) {
-    const id = boardsRef.push().key
-    const board = { id, name, owner }
+  async getBoardsByUser (userId) {
+    const request = query(boardsRef, where('owner', '==', userId))
+    const data = await getDocs(request)
 
-    return boardsRef.child(id).set(board)
-      .then(() => board)
+    const response = []
+    data.forEach((doc) => {
+      const dat = doc.data()
+      response.push({
+        id: doc.id,
+        name: dat.name,
+        owner: dat.owner
+      })
+    })
+
+    return response
+  },
+  async postBoard (name, owner = 1) {
+    const board = { name, owner }
+    const docRef = await addDoc(boardsRef, board)
+    Object.assign(board, { id: docRef.id })
+
+    return board
   },
   getListsFromBoard (boardId) {
     const query = listsRef.orderByChild('board').equalTo(boardId)
