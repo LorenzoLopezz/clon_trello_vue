@@ -1,7 +1,8 @@
-import * as firebase from 'firebase'
+import { initializeApp } from 'firebase/app'
+import { getFirestore } from 'firebase/firestore'
 import settings from './settings'
 
-const firebaseApp = firebase.initializeApp(settings)
+const firebaseApp = initializeApp(settings)
+const db = getFirestore(firebaseApp)
 
-export const db = firebaseApp.database()
-export default firebaseApp
+export { db, firebaseApp }

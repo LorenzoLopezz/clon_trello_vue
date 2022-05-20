@@ -1,8 +1,9 @@
 import { db } from './firebase'
+import { collection } from 'firebase/firestore'
 
-const boardsRef = db.ref('boards')
-const listsRef = db.ref('lists')
-const tasksRef = db.ref('tasks')
+const boardsRef = collection(db, 'boards')
+const listsRef = collection(db, 'lists')
+const tasksRef = collection(db, 'tasks')
 
 export default {
   getBoardsByUser (userId) {
