@@ -18,7 +18,7 @@ export default {
     commit(types.FETCH_LIST_REQUEST)
 
     API.getListsFromBoard(board)
-      .then(snap => commit(types.FETCH_LIST_SUCCESS, { lists: snap.val() }))
+      .then(snap => commit(types.FETCH_LIST_SUCCESS, { lists: snap }))
       .catch(error => commit(types.FETCH_LIST_FAILURE, { error }))
   },
 

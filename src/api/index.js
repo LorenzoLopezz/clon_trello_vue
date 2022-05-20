@@ -29,9 +29,21 @@ export default {
 
     return board
   },
-  getListsFromBoard (boardId) {
-    const query = listsRef.orderByChild('board').equalTo(boardId)
-    return query.once('value')
+  async getListsFromBoard (boardId) {
+    const request = query(listsRef, where('board', '==', '/boards/' + boardId))
+    const data = await getDocs(request)
+
+    const response = []
+    data.forEach((doc) => {
+      const dat = doc.data()
+      response.push({
+        id: doc.id,
+        name: dat.name,
+        board: dat.board
+      })
+    })
+    console.log(response)
+    return response
   },
   postList (board, name) {
     const id = listsRef.push().key
