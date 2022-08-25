@@ -1,24 +1,22 @@
-# vue_trello
+# "TrellO" en Vue - Lorenzo López
 
-## Project setup
-```
-npm install
-```
+Práctica de apredizaje para Vue, Vue router y Vuex. 
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Para poder usar el proyecto será necesario ingresar los datos de conexión para una base de datos firebase:
+````
+// src/api/settings.js
 
-### Compiles and minifies for production
-```
-npm run build
-```
+export default {
+  apiKey: '',
+  authDomain: '',
+  projectId: '',
+  storageBucket: '',
+  messagingSenderId: '',
+  appId: '',
+  measurementId: ''
+}
+````
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+````
+npm install or yarn install
+````
